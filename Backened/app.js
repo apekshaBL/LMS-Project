@@ -1,10 +1,10 @@
-const dotenv=require("dotenv");
-dotenv.config();
-const cors=require("cors");
-const cookieParser=require("cookie-parser");
+
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import express from 'express';
 
 
-const express=require("express");
+
 const app=express();
 
 //middlewares to pass json data from body
@@ -25,10 +25,17 @@ app.use("/about",(req,res)=>{
     })
 });
 
+app.use((err,req,res,next)=>{
+    console.log(err.stack);
+    res.status(500).json({
+        message:"Internal server Error"
+    });
+});
+
 //if any url is enter ....
 app.all('*',(req,res)=>{
     res.status(404).json({
         message:" OOPS !!! route not fount"
     });
 })
-module.exports=app;
+export default app;
