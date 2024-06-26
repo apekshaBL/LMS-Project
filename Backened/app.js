@@ -4,6 +4,9 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import morgan from 'morgan';
 import database from './config/databaseConfig.js';
+import userRoutes from './router/user.routes.js';
+
+
 
 const app=express();
 
@@ -30,6 +33,9 @@ app.use("/about",(req,res)=>{
         message:"welcome to my page"
     })
 });
+
+
+app.use('/api/auth/user',userRoutes);
 
 app.use((err,req,res,next)=>{
     console.log(err.stack);
