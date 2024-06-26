@@ -35,7 +35,7 @@ app.use("/about",(req,res)=>{
 });
 
 
-app.use('/api/auth/user',userRoutes);
+app.use('/api/auth/ ',userRoutes);
 
 app.use((err,req,res,next)=>{
     console.log(err.stack);
