@@ -3,11 +3,15 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import morgan from 'morgan';
+import database from './config/databaseConfig.js';
 
 const app=express();
 
 //middlewares to pass json data from body
 app.use(express.json());
+
+//connect to the database
+database();
 
 //cors
 app.use(cors({
