@@ -5,6 +5,7 @@ import express from 'express';
 import morgan from 'morgan';
 import database from './config/databaseConfig.js';
 import userRoutes from './router/user.routes.js';
+import errorMiddleware from './Middlewares/error.middleware.js';
 
 
 
@@ -50,4 +51,8 @@ app.all('*',(req,res)=>{
         message:" OOPS !!! route not fount"
     });
 })
+
+
+app.use(errorMiddleware);
+
 export default app;
