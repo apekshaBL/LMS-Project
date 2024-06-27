@@ -1,4 +1,5 @@
-
+import dotenv from "dotenv";
+dotenv.config();
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import express from 'express';
@@ -6,8 +7,6 @@ import morgan from 'morgan';
 import database from './config/databaseConfig.js';
 import userRoutes from './router/user.routes.js';
 import errorMiddleware from './Middlewares/error.middleware.js';
-
-
 
 const app=express();
 
@@ -35,24 +34,17 @@ app.use("/about",(req,res)=>{
     })
 });
 
+app.use('/api/auth/',userRoutes);
 
-app.use('/api/auth/ ',userRoutes);
 
-app.use((err,req,res,next)=>{
-    console.log(err.stack);
-    res.status(500).json({
-        message:"Internal server Error"
-    });
-});
-
-//if any url is enter ....
+//handle undefined routes ....
 app.all('*',(req,res)=>{
     res.status(404).json({
         message:" OOPS !!! route not fount"
     });
-})
+})  
 
-
+//error handling middlewares
 app.use(errorMiddleware);
 
 export default app;
