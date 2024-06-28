@@ -3,6 +3,7 @@ import AppError from "../utils/error.utils.js";
 import User from "../models/user.modelSchemas.js";
 import  cloudinary from "cloudinary";
 import fs from 'fs/promises'
+import sendEmail from "../utils/sendEmail.js";
 
 const cookieOptions={
     maxAge:7*24*60*60*1000, // 7 days cookie is set
@@ -15,6 +16,7 @@ const  register =async(req,res,next)=>{
     const{username,email,password}=req.body;
     console.log(username,email,password);
     try{
+       
     if(!username || !email || !password){
         return next(new AppError("All fields are required",400));
      }
@@ -26,6 +28,7 @@ const  register =async(req,res,next)=>{
     if(userExists){
         return next(new AppError("email already exists",400));
     }
+  
     const user=await User.create({
         username,
         email,
@@ -56,7 +59,7 @@ const  register =async(req,res,next)=>{
                 user.avatar.secure_url=result.secure_url;
 
                 //remove file from server
-                fs.rm(`uploads/${req.file.filename}`)
+                await fs.rm(`uploads/${req.file.filename}`)
             }
 
         }
@@ -134,7 +137,7 @@ const logout=(req,res)=>{
 
 
 //get profile function
-const getProfile=async(req,res)=>{
+const getProfile=async(req,res,next)=>{
     try{
         const userId=req.user.id;
         const user =await User.findById(userId);
@@ -148,8 +151,62 @@ const getProfile=async(req,res)=>{
     catch(error){
         return next (new AppError("failed to fetch profile",400))
     }
-};
+};  
+
+//forgotPassword
+const forgotPassword=async(req,res,next)=>{
+    const{email}=req.body;
+    try{
+        if(!email){
+            return next(new AppError("Please provide your email address",400))
+        };
+        const user=await User.findOne({email});
+        if(!user){
+            return next(new AppError("User not register",400))
+        };
+        const resetToken=await user.generatePasswordResetToken();
+        await user.save();
+        const resetPasswordURL=`${process.env.FRONTEND_URL}/resetPassword/${resetToken}`;
+
+        const subject='Reset password'
+        const message=`you can reset your password by clicking <a href=${resetPasswordURL}`;
+
+        try{
+            await sendEmail(email,subject,message);
+            res.status(200).json({
+                success:true,
+                message:`Password reset link is sent to your email ${email}`
+            })
+
+        }
+        catch(error){
+            user.forgetPasswordToken=undefined;
+            user.forgetPasswordExpiry=undefined;
+            await user.save();
+            return next(new AppError(error.message,500));
+        }
+
+    }
+    catch(error){
+        return next(new AppError("failed to reset the password",400))
+    }
+
+}
+
+
+//resetPasword
+const resetPassword=()=>{
+
+}
+
+
+
+
+
+
+
+
 //export
 export { 
-    register,login,logout,getProfile
+    register,login,logout,getProfile,forgotPassword,resetPassword
 }
