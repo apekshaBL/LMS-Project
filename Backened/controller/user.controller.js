@@ -222,6 +222,8 @@ const resetPassword=async(req,res,next)=>{
 
 }
 
+
+//changed password
 const changePassword=async(res,req,next)=>{
     const {oldPassword,newPassword}=req.body;
     const {id}=req.user;
@@ -241,20 +243,62 @@ const changePassword=async(res,req,next)=>{
     user.password=newPassword;
     await user.save();
     user.password=undefined;
-    
+
     res.status(200).json({
         success:true,
         message:'Password changed successfully!'
     });
 
-
-
 }
+
+
+
+//update function
+const update=async(req,res,next)=>{
+    const {username}=req.body;
+    const{id}=req.params;
+    const user=User.findOne({id});
+    if(!user){
+        return next(new AppError('user doest not exit',400))
+    };
+    if(req.username){
+        user.username=username;
+    };
+    if(req.file){
+        await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+       
+                try{
+                    const result=await cloudinary.v2.uploader.upload(req.file.path,{
+                        folder:'lms',
+                        width:250,
+                        height:250,
+                        gravity:'faces',
+                        crop:'fill'
+                    });
+                    if(result){
+                        user.avatar.public_id=result.public_id;
+                        user.avatar.secure_url=result.secure_url;
+        
+                        //remove file from server
+                        await fs.rm(`uploads/${req.file.filename}`)
+                    }
+                }
+                catch(error){
+                    return next ( new AppError(error || 'file not uploaded,please try again',500))
+                }
+            }
+        
+        await user.save();
+        res.status(200).json({
+            success:true,
+            message:"proflie updated successfully"
+        })
+    }
 
 
 
 
 //export
 export { 
-    register,login,logout,getProfile,forgotPassword,resetPassword,changePassword
+    register,login,logout,getProfile,forgotPassword,resetPassword,changePassword,update
 }
