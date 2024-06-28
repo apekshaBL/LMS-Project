@@ -63,7 +63,6 @@ const  register =async(req,res,next)=>{
                 //remove file from server
                 await fs.rm(`uploads/${req.file.filename}`)
             }
-
         }
         catch(error){
             return next ( new AppError(error || 'file not uploaded,please try again',500))
@@ -223,11 +222,39 @@ const resetPassword=async(req,res,next)=>{
 
 }
 
+const changePassword=async(res,req,next)=>{
+    const {oldPassword,newPassword}=req.body;
+    const {id}=req.user;
+    if(!oldPassword || !newPassword){
+        return next(new AppError('Please provide old and new password',400))
+    };
+    const user=await User.findOne({password});
+    if(!user){
+        return next(new AppError('Password is incorrect',400))
+    };
+    const isPasswordValid=await user.comparePassword(oldPassword);
+
+    if(!isPasswordValid){
+        return next(new AppError("Password not valid",400))
+    };
+
+    user.password=newPassword;
+    await user.save();
+    user.password=undefined;
+    
+    res.status(200).json({
+        success:true,
+        message:'Password changed successfully!'
+    });
+
+
+
+}
 
 
 
 
 //export
 export { 
-    register,login,logout,getProfile,forgotPassword,resetPassword
+    register,login,logout,getProfile,forgotPassword,resetPassword,changePassword
 }
