@@ -4,6 +4,7 @@ import User from "../models/user.modelSchemas.js";
 import  cloudinary from "cloudinary";
 import fs from 'fs/promises'
 import sendEmail from "../utils/sendEmail.js";
+import crypto from "crypto";
 
 const cookieOptions={
     maxAge:7*24*60*60*1000, // 7 days cookie is set
@@ -25,6 +26,7 @@ const  register =async(req,res,next)=>{
         return next(new AppError("enter validate email",400));
     }
     const userExists=await User.findOne({email});
+
     if(userExists){
         return next(new AppError("email already exists",400));
     }
@@ -68,8 +70,6 @@ const  register =async(req,res,next)=>{
         }
     }
 
-
-
         //save all data
         await user.save();
 
@@ -102,7 +102,7 @@ const login=async (req,res,next)=>{
 
         const user=await User.findOne({email}).select('+password');
 
-        if(!user||!user.comparePassword(password)){
+        if(!user||!(await user.comparePassword(password))){
             return next(new AppError("Incorresct email or password",400))
         }
         //undefined password so dont show is
@@ -132,7 +132,7 @@ const logout=(req,res)=>{
     res.status(200).json({
         success:true,
         message:"User logged out successfully !"
-    })
+    });
 };
 
 
@@ -164,28 +164,27 @@ const forgotPassword=async(req,res,next)=>{
         if(!user){
             return next(new AppError("User not register",400))
         };
+
         const resetToken=await user.generatePasswordResetToken();
         await user.save();
-        const resetPasswordURL=`${process.env.FRONTEND_URL}/resetPassword/${resetToken}`;
-
+        const resetPasswordURL=`${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+        console.log(resetPasswordURL);
         const subject='Reset password'
-        const message=`you can reset your password by clicking <a href=${resetPasswordURL}`;
+        const message=`you can reset your password by clicking <a href="${resetPasswordURL}">here</a>.`;
 
         try{
             await sendEmail(email,subject,message);
             res.status(200).json({
                 success:true,
                 message:`Password reset link is sent to your email ${email}`
-            })
-
+            });
         }
         catch(error){
-            user.forgetPasswordToken=undefined;
-            user.forgetPasswordExpiry=undefined;
+            user.forgotPasswordExpiry=undefined;
+            user.forgotPasswordToken=undefined;
             await user.save();
             return next(new AppError(error.message,500));
         }
-
     }
     catch(error){
         return next(new AppError("failed to reset the password",400))
@@ -195,12 +194,34 @@ const forgotPassword=async(req,res,next)=>{
 
 
 //resetPasword
-const resetPassword=()=>{
+const resetPassword=async(req,res,next)=>{
+
+    const{resetToken}=req.params;
+    const{password}=req.body;
+    const forgotPasswordToken=crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+
+    const user=await User.findOne({
+        forgotPasswordToken,
+        forgotPasswordExpiry:{$gt:Date.now()}
+    });
+    if(!user){
+        return next(
+            new AppError('Token is invalid or expired ,please try again',400)
+        )
+    }
+    user.password=password;
+    user.forgotPasswordToken=undefined;
+    user.forgotPasswordExpiry=undefined;
+    user.save()
+    res.status(200).json({
+        success:true,
+        message:'Password changed successfully!'
+    })
 
 }
-
-
-
 
 
 

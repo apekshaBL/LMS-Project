@@ -13,6 +13,8 @@ const app=express();
 //middlewares to pass json data from body
 app.use(express.json());
 
+app.use(express.urlencoded({extended:true}))
+
 //connect to the database
 database();
 

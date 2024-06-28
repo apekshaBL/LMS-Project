@@ -10,7 +10,7 @@ userRoutes.post("/login",login);
 userRoutes.get("/logout",register);
 userRoutes.get("/me",isLoggedIn,getProfile);
 userRoutes.post("/forgot-password",forgotPassword);
-userRoutes.post("/reset-password",resetPassword);
+userRoutes.post("/reset/:resetToken",resetPassword);
 
 
 
