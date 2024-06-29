@@ -17,10 +17,26 @@ const getAllcourses=async function (req,res,next){
     }catch(error){
         return next(new AppError(error.message,500))
     };
-   
 }
 const getLecturesByCourseId=async(req,res,next)=>{
-}
+    try{
+        const { id }=req.params;
+        const course=await Course.findById(id);
+        if(!course){
+            
+            return next(new AppError('Course not found',404))
+        }
+        res.status(200).json({
+            success:true,
+            message:'Lectures by course id',
+            lectures:course.lectures
+        });
+
+
+    }catch(error){
+        return next(new AppError(error.message,500))
+    }
+};
 
 
 //create all courses
@@ -44,9 +60,7 @@ const createcourse=(req,res,next)=>{
     catch(error){
         return next(new AppError(error.message,500))
     };
-
 }
-
 
 export {
     getAllcourses ,getLecturesByCourseId,createcourse
