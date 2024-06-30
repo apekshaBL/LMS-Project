@@ -138,6 +138,52 @@ const deletecourse=async(req,res,next)=>{
 
 }
 
+const addLectures=async(req,res,next)=>{
+    try{
+        const {title,description}=req.body;
+        const{id}=req.params;
+        if(!title || !description){
+            return next(new AppError("please provide title and description",400))
+        };
+        const course=await Course.findById(id);
+        if(!course){
+            return next(new AppError("course not found",400))
+        }
+       const lectureData={
+        title,
+        description,
+       };
+
+       if(req.body){
+        try{
+        const result=await cloudinary.v2.uploader.upload(req.file.path,{
+            folder:'lms'
+        }); 
+        if(result){
+            lectureData.thumbnail.public_id=result.public_id;
+            lectureData.thumbnail.secure_url=result.secure_url;
+        }
+        fs.rm( `uploads/${req.file.filename}`);
+    }catch(err){
+        return next(new AppError(err,500));
+    } 
+    }
+    course.lectures.push(lectureData);
+    course.numbersOfLectures=course.lectures,length;
+    await course.save();
+    res.status(200).json({
+        success:true,
+        message:'Lectures added successfully !'
+    });
+
+}
+    catch(err){
+        return next(new AppError(err,500))
+
+    }
+
+}
+
 export {
-    getAllcourses ,getLecturesByCourseId,createcourse,updatecourse,deletecourse
+    getAllcourses ,getLecturesByCourseId,createcourse,updatecourse,deletecourse,addLectures
 }
