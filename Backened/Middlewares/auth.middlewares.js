@@ -10,6 +10,17 @@ const isLoggedIn=async (req,res,next)=>{
     req.user=userDetails;
     next();
 }
+
+
+const authorized=(...roles)=>async(req,res,next)=>{
+    const currentUserRole=req.user.role;
+    if(!roles.includes(currentUserRole)){
+        return next(new AppError("Do not have permission to de this activity",403))
+
+    }
+    next();
+}
+
 export{
-    isLoggedIn
+    isLoggedIn,authorized
 }
