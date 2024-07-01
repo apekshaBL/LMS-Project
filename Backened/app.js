@@ -8,6 +8,8 @@ import database from './config/databaseConfig.js';
 import userRoutes from './router/user.routes.js';
 import errorMiddleware from './Middlewares/error.middleware.js';
 import router from "./router/course.routes.js";
+import paymentrouter from "./router/payment.routes.js";
+
 
 const app=express();
 
@@ -39,6 +41,7 @@ app.use("/about",(req,res)=>{
 
 app.use('/api/auth/',userRoutes);
 app.use('/api/course/',router);
+app.use('/api/payment/',paymentrouter);
 
 
 //handle undefined routes ....
