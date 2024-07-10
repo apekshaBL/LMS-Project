@@ -18,7 +18,7 @@
 4.start the server
 
 ```
-   npm run dev
+  npm run dev
 
 ```
 
@@ -28,7 +28,7 @@
 1.Install tailwindcss
 
 ```
-  npm install -D tailwindcss
+   npm install -D tailwindcss
 
 ```
 2. Create tailwind Config file
