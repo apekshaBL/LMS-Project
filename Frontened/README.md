@@ -3,12 +3,12 @@
 ### Setup instruction
 1.Clone the Project
 ```
-       git clone https://github.com/apekshaBL/LMS-Project.git
+   git clone https://github.com/apekshaBL/LMS-Project.git
 
 ```
 2.move to the directory
 ```
-      cd Frontened-hn
+   cd Frontened
 ```
 3.install the dependency
 
@@ -18,7 +18,7 @@
 4.start the server
 
 ```
-  npm run dev
+   npm run dev
 
 ```
 
@@ -39,14 +39,14 @@
 ```
 3. Add file extension to tailwind config file in the contents property
 ```
-  *./src/**/*.{html,js,jsx,ts,tsx}*
+   *./src/**/*.{html,js,jsx,ts,tsx}*
 
 ```
 4. Add the tailwind directive at the top of the `index.css` file
 ```
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
   
 ```
 ### Setup intruction for shadcn
