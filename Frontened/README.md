@@ -50,6 +50,7 @@
   
 ```
 ### Setup intruction for shadcn
+[Shadcn official instruction doc](https://ui.shadcn.com/docs/installation/vite)
 1. create the `jsconfig.json` file and add the code to it
 ```
 {
