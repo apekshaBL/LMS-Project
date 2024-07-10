@@ -4,7 +4,7 @@ import './index.css'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import store from './Redux/Slices/Store.js'
+import store from './Redux/Store.js'
 
 
 
