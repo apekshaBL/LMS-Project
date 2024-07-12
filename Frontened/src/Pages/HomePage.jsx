@@ -1,251 +1,66 @@
-import HomeLayouts from "@/Layouts/HomeLayouts";
 import { Link } from 'react-router-dom';
-
-
+import HomeLayouts from '@/Layouts/HomeLayouts';
 
 function HomePage() {
-    return (
-        <HomeLayouts>
-            {/* Hero Section */}
-            <div className="relative pt-20 pb-20 text-white flex flex-col items-center justify-center bg-cover bg-center" style={{ backgroundImage: 'url(/path/to/your/image.jpg)' }}>
-                <div className="absolute inset-0 bg-black opacity-50"></div>
-                <div className="relative z-10 w-full space-y-6 text-center">
-                    <h1 className="text-6xl font-bold">Discover the Best Online Courses</h1>
-                    <p className="text-2xl mt-4">Enhance your skills with expert-led courses.</p>
-                    <Link to='/signup'>
-                    <button className="mt-6 px-6 py-3 bg-yellow-500 text-black font-bold rounded-full hover:bg-yellow-600 transition duration-300">Join Now</button>
-                    </Link>
-                   
+  return (
+    <HomeLayouts>
+      <div className="container mx-auto p-6">
+        {/* Hero Section */}
+        <section className="flex flex-col md:flex-row items-center justify-between py-20 bg-gray-800 text-white">
+          <div className="md:w-1/2 p-6">
+            <img src="https://via.placeholder.com/400" alt="Course Image" className="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div className="md:w-1/2 p-6 text-center md:text-left">
+            <h1 className="text-5xl font-bold">Elevate Your Skills with Us</h1>
+            <p className="mt-4 text-xl">Discover a range of expertly designed courses tailored to your needs.</p>
+            <button className="mt-6 bg-teal-500 text-white py-2 px-6 rounded-full hover:bg-teal-600 transition-colors duration-300">Explore Courses</button>
+          </div>
+        </section>
+
+        {/* Scroll Down Section */}
+        <section className="relative mt-16 py-16 bg-cover bg-center text-white" style={{ backgroundImage: "url('https://via.placeholder.com/1200x600')" }}>
+          <div className="absolute inset-0 bg-black opacity-40"></div>
+          <div className="relative z-10 text-center">
+            <h2 className="text-4xl font-semibold">Why Choose Us?</h2>
+            <p className="mt-4 text-lg">We offer unparalleled learning experiences and resources.</p>
+            <div className="mt-10 flex flex-wrap justify-center gap-6">
+              <div className="max-w-xs p-6 bg-white bg-opacity-90 shadow-lg rounded-lg">
+                <div className="text-teal-500 w-16 h-16 mx-auto">
+                  <i className="fas fa-chalkboard-teacher fa-3x"></i>
                 </div>
-            </div>
-
-            {/* Features Section */}
-            <div className="py-16 bg-gray-300 text-black">
-                <h2 className="text-3xl font-semibold text-center">Why Choose Us?</h2>
-                <div className="flex justify-around mt-8">
-                    <div className="w-1/4 p-6 text-center bg-white shadow-md rounded-lg">
-                        <h3 className="text-xl font-bold">Expert Instructors</h3>
-                        <p>Learn from industry leaders with years of experience.</p>
-                    </div>
-                    <div className="w-1/4 p-6 text-center bg-white shadow-md rounded-lg">
-                        <h3 className="text-xl font-bold">Flexible Learning</h3>
-                        <p>Study at your own pace with our flexible course schedules.</p>
-                    </div>
-                    <div className="w-1/4 p-6 text-center bg-white shadow-md rounded-lg">
-                        <h3 className="text-xl font-bold">Affordable Prices</h3>
-                        <p>Access high-quality education without breaking the bank.</p>
-                    </div>
+                <h3 className="text-2xl font-semibold text-gray-800 mt-4">Expert Tutors</h3>
+                <p className="mt-2 text-gray-700">Learn from industry leaders who are dedicated to your success.</p>
+              </div>
+              <div className="max-w-xs p-6 bg-white bg-opacity-90 shadow-lg rounded-lg">
+                <div className="text-teal-500 w-16 h-16 mx-auto">
+                  <i className="fas fa-clock fa-3x"></i>
                 </div>
-            </div>
-
-            {/* Popular Courses Section */}
-            <div className="py-16 bg-white text-black">
-                <h2 className="text-3xl font-semibold text-center">Popular Courses</h2>
-                <div className="flex justify-around mt-8">
-                    <div className="w-1/4 p-6 text-center bg-gray-100 shadow-md rounded-lg">
-                        <h3 className="text-xl font-bold">Full Stack Web Development</h3>
-                        <p>Master Web Development: Build Real-World Projects from Scratch!.</p>
-                        <Link to="/courses/1" className="text-blue-500 hover:underline">Learn More</Link>
-                    </div>
-                    <div className="w-1/4 p-6 text-center bg-gray-100 shadow-md rounded-lg">
-                        <h3 className="text-xl font-bold">Full Stack Java Developer</h3>
-                        <p>Transform Your Career: In-Depth Java Development Training.</p>
-                        <Link to="/courses/2" className="text-blue-500 hover:underline">Learn More</Link>
-                    </div>
-                    <div className="w-1/4 p-6 text-center bg-gray-100 shadow-md rounded-lg">
-                        <h3 className="text-xl font-bold">Artificial Intelligence and machine Learning</h3>
-                        <p>Unlock the Power of AI: Learn Machine Learning from Industry Leaders!</p>
-                        <Link to="/courses/3" className="text-blue-500 hover:underline">Learn More</Link>
-                    </div>
+                <h3 className="text-2xl font-semibold text-gray-800 mt-4">Flexible Scheduling</h3>
+                <p className="mt-2 text-gray-700">Enjoy the freedom to learn at your own pace.</p>
+              </div>
+              <div className="max-w-xs p-6 bg-white bg-opacity-90 shadow-lg rounded-lg">
+                <div className="text-teal-500 w-16 h-16 mx-auto">
+                  <i className="fas fa-book-open fa-3x"></i>
                 </div>
+                <h3 className="text-2xl font-semibold text-gray-800 mt-4">Comprehensive Content</h3>
+                <p className="mt-2 text-gray-700">Access extensive and interactive resources.</p>
+              </div>
             </div>
+          </div>
+        </section>
 
-          {/* Testimonials Section */}
-<div className="py-7 bg-gray-100 text-black">
-  <h2 className="text-3xl font-semibold text-center">What Our Students Say</h2>
-  <div className="flex flex-wrap justify-around mt-8">
-    <div className="w-full sm:w-1/3 p-6 text-center bg-white shadow-md rounded-lg">
-      <p>"The course was incredibly well-structured and the instructors were top-notch!"</p>
-      <span className="block mt-4 font-bold">
-        <div className="flex justify-evenly">
-        <div className="avatar">
-          <div className="ring-primary ring-offset-base-100 w-24 h-24 rounded-full ring ring-offset-90">
-            <img
-              className="rounded-full w-full h-full object-cover"
-              src="https://tse4.mm.bing.net/th?id=OIP.lGs8_kicfoRys5XSv-j0GQHaE7&pid=Api&P=0&h=180"
-              alt="Avatar"
-            />
-          </div>
-        </div>
-        <h1>-Satyam Shivam</h1>
-        </div>
-       
-      </span>
-    </div>
-    <div className="w-full sm:w-1/3 p-6 text-center bg-white shadow-md rounded-lg">
-      <p>"Exceptional value for money—high-quality education without breaking the bank."</p>
-      <span className="block mt-4 font-bold">
-        <div className="flex justify-evenly">
-        <div className="avatar">
-          <div className="ring-primary ring-offset-base-100 w-24 h-24 rounded-full ring ring-offset-90">
-            <img
-              className="rounded-full w-full h-full object-cover"
-              src="https://tse2.mm.bing.net/th?id=OIP.fWT00kLoWGxXTyRft8VhMwHaE7&pid=Api&P=0&h=180"
-              alt="Avatar"
-            />
-          </div>
-        </div>
-        <h1>-Tanu Arora</h1>
-        </div>
-       
-      </span>
-    </div>
-    <div className="w-full sm:w-1/3 p-6 text-center bg-white shadow-md rounded-lg">
-      <p>"Excellent balance between theory and practical application made the course highly effective."</p>
-      <span className="block mt-4 font-bold">
-        <div className="flex justify-evenly">
-        <div className="avatar">
-          <div className="ring-primary ring-offset-base-100 w-24 h-24 rounded-full ring ring-offset-90">
-            <img
-              className="rounded-full w-full h-full object-cover"
-              src="https://tse1.mm.bing.net/th?id=OIP.Ylhtem14WGHy5v7UiTuHoAHaGH&pid=Api&P=0&h=180"
-              alt="Avatar"
-            />
-          </div>
-        </div>
-        <h1>-Shraddha Araya</h1>
-        </div>
-       
-      </span>
-    </div>
-   {/* Testimonials Section */}
-<div className="py-7 bg-gray-100 text-black">
-  <div className="flex flex-wrap justify-around mt-8">
-    <div className="w-full sm:w-1/3 p-6 text-center bg-white shadow-md rounded-lg">
-      <p>"This platform has transformed the way I learn. Highly recommended!"</p>
-      <span className="block mt-4 font-bold">
-        <div className="flex justify-evenly">
-        <div className="avatar">
-          <div className="ring-primary ring-offset-base-100 w-24 h-24 rounded-full ring ring-offset-90">
-            <img
-              className="rounded-full w-full h-full object-cover"
-              src="https://tse3.mm.bing.net/th?id=OIP.mPn9nhQjKJg8R8-vXyY4YAHaI2&pid=Api&P=0&h=180"
-              alt="Avatar"
-            />
-          </div>
-        </div>
-        <h1>-Pranod Shelar</h1>
-        </div>
-        
-      </span>
-    </div>
-    <div className="w-full sm:w-1/3 p-6 text-center bg-white shadow-md rounded-lg">
-      <p>"The instructors are very knowledgeable and the courses are very comprehensive."</p>
-      <span className="block mt-4 font-bold">
-        <div className="flex justify-evenly">
-        <div className="avatar">
-          <div className="ring-primary ring-offset-base-100 w-24 h-24 rounded-full ring ring-offset-90">
-            <img
-              className="rounded-full w-full h-full object-cover"
-              src="https://tse4.mm.bing.net/th?id=OIP.YCOB-jHfPvCWBvu1---VkgHaE8&pid=Api&P=0&h=180"
-              alt="Avatar"
-            />
-          </div>
-        </div>
-        <h1>-Manoj Tripathi</h1>
-        </div>
-      
-      </span>
-    </div>
-    <div className="w-full sm:w-1/3 p-6 text-center bg-white shadow-md rounded-lg">
-      <p>"The projects and assignments were relevant and provided real-world experience"</p>
-      <span className="block mt-4 font-bold">
-        <div className=" flex justify-evenly">
-        <div className="avatar">
-          <div className="ring-primary ring-offset-base-100 w-24 h-24 rounded-full ring ring-offset-90">
-            <img
-              className="rounded-full w-full h-full object-cover"
-              src="https://tse1.mm.bing.net/th?id=OIP.yir0s_y4ZBciy9TQFvkPRgHaE8&pid=Api&P=0&h=180"
-              alt="Avatar"
-            />
-          </div>
-           
-           
-        </div>
-        <h1>-Pranali Rathode</h1>
-        </div>
-       
-      </span>
-    </div>
-    {/* Testimonials Section */}
-<div className="py-7 bg-gray-100 text-black">
+        {/* Footer Section */}
+        <footer className="mt-16 text-center py-8 bg-gray-900 text-white">
+          <h2 className="text-3xl font-semibold">Start Your Learning Journey Today!</h2>
+          <p className="mt-4 text-lg">Join our community and make the most of our offerings.</p>
+          <Link to="/signup">
+          <button className="mt-6 bg-teal-500 py-3 px-8 rounded-full hover:bg-teal-600 transition-colors duration-300">Get Started</button>
+          </Link>
 
-  <div className="flex flex-wrap justify-around mt-8">
-    <div className="w-full sm:w-1/3 p-6 text-center bg-white shadow-md rounded-lg">
-      <p>"Fantastic support and mentorship throughout the course made the learning process smooth and enjoyable."</p>
-      <span className="block mt-4 font-bold">
-        <div className="flex justify-evenly">
-        <div className="avatar">
-          <div className="ring-primary ring-offset-base-100 w-24 h-24 rounded-full ring ring-offset-90">
-            <img
-              className="rounded-full w-full h-full object-cover"
-              src="https://tse3.mm.bing.net/th?id=OIP.z_fteR9BXh4O1GBL72A1GgHaHZ&pid=Api&P=0&h=180"
-              alt="Avatar"
-            />
-          </div>
-        </div>
-            <h1>-Sakshi Tyagi</h1>
-        </div>
-        
-      </span>
-    </div>
-    <div className="w-full sm:w-1/3 p-6 text-center bg-white shadow-md rounded-lg">
-      <p>"Impressed by the quality of the course material and the dedication of the instructors."</p>
-      <span className="block mt-4 font-bold">
-        <div className="flex justify-evenly">
-        <div className="avatar">
-          <div className="ring-primary ring-offset-base-100 w-24 h-24 rounded-full ring ring-offset-90">
-            <img
-              className="rounded-full w-full h-full object-cover"
-              src="https://tse2.mm.bing.net/th?id=OIP.zL2S0eWK21yF0PhqzOcWwQHaK3&pid=Api&P=0&h=180"
-              alt="Avatar"
-            />
-          </div>
-        </div>
-        <h1>-Pratik Manhor</h1>
-        </div>
-       
-      </span>
-    </div>
-    <div className="w-full sm:w-1/3 p-6 text-center bg-white shadow-md rounded-lg">
-      <p>"An exceptional learning experience with hands-on projects that made learning practical and engaging."</p>
-      <span className="block mt-4 font-bold">
-        <div className="flex justify-evenly">
-        <div className="avatar">
-          <div className="ring-primary ring-offset-base-100 w-24 h-24 rounded-full ring ring-offset-90">
-            <img
-              className="rounded-full w-full h-full object-cover"
-              src="https://tse1.mm.bing.net/th?id=OIP.sTK_T0a2vcOqVrQzMN61hQHaFb&pid=Api&P=0&h=180"
-              alt="Avatar"
-            />
-          </div>
-        </div>
-         <h1>-Rahul Mishra</h1>
-        </div>
-       
-      </span>
-    </div>
-{/* Testimonials Section */}
-  </div>
-</div>
-
-  </div>
-</div>
-
-  </div>
-</div>
-        </HomeLayouts>
-    );
+        </footer>
+      </div>
+    </HomeLayouts>
+  );
 }
 
 export default HomePage;
