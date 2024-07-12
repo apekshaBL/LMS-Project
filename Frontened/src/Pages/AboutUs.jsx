@@ -4,20 +4,20 @@ import { useState } from 'react';
 
 function AboutUs() {
 
-    const[currentSlide,setCurrentSlide]=useState(0);
+    // const[currentSlide,setCurrentSlide]=useState(0);
 
-    const slides=[
-        "https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg",
-        "https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.jpg",
-        "https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.jpg",
-        "https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.jpg"    
-    ];
-    const handlePrev=()=>{
-        setCurrentSlide((prev)=>(prev === 0 ? slides.length -1:prev-1));
-    };
-    const handleNext=()=>{
-        setCurrentSlide((prev)=>(prev==slides.length-1 ? 0 :prev+1));
-    }
+    // const slides=[
+    //     "",
+    //     "https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.jpg",
+    //     "https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.jpg",
+    //     "https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.jpg"    
+    // ];
+    // const handlePrev=()=>{
+    //     setCurrentSlide((prev)=>(prev === 0 ? slides.length -1:prev-1));
+    // };
+    // const handleNext=()=>{
+    //     setCurrentSlide((prev)=>(prev==slides.length-1 ? 0 :prev+1));
+    // }
   return (
     <HomeLayouts>
       <div className="min-h-screen flex flex-col">
@@ -38,7 +38,7 @@ function AboutUs() {
           {/* Image Section */}
           <div className="md:w-1/2 p-6">
             <img
-              src="https://via.placeholder.com/600x400" // Replace with your image URL
+              src="https://images.pexels.com/photos/840996/pexels-photo-840996.jpeg?auto=compress&cs=tinysrgb&w=600" // Replace with your image URL
               alt="Education"
               className="w-full h-auto rounded-lg shadow-lg"
             />
@@ -46,7 +46,7 @@ function AboutUs() {
         </div>
       </div>
       {/* Carousel Section */}
-      <div className="relative mt-16 overflow-hidden">
+      {/* <div className="relative mt-16 overflow-hidden">
           <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
             {slides.map((slide, index) => (
               <div key={index} className="w-full flex-shrink-0">
@@ -68,7 +68,7 @@ function AboutUs() {
               ❯
             </button>
           </div>
-        </div>
+        </div> */}
     </HomeLayouts>
   );
 }

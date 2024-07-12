@@ -23,7 +23,7 @@ database();
 
 //cors
 app.use(cors({
-    origin:"*",
+    origin:[process.env.FRONTEND_URL],
     credentials:true
 }));
 
@@ -39,9 +39,9 @@ app.use("/about",(req,res)=>{
     })
 });
 
-app.use('/api/auth/',userRoutes);
-app.use('/api/course/',router);
-app.use('/api/payment/',paymentrouter);
+app.use('/api/v1/user',userRoutes);
+app.use('/api/v1/courses',router);
+app.use('/api/v1/payments',paymentrouter);
 
 
 //handle undefined routes ....
