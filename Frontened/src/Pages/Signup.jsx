@@ -68,12 +68,12 @@ function Signup() {
     formData.append("avatar", signupData.avatar);
 
     try {
-      const response = await dispatch(createAccount(formData));
+      const response = await dispatch(createAccount(formData)).unwrap();
       console.log(response);
-      if (response.payload && response.payload.success) {
+      if (response && response.success) {
         navigate('/');
+      
       } else {
-        console.log(error);
         toast.error('Error in creating account. Please try again!');
       }
     } catch (error) {
@@ -98,8 +98,8 @@ function Signup() {
 
         {/* Signup Card Section */}
         <div className="w-full md:w-1/2 flex items-center justify-center bg-gray-800 p-6">
-          <div className="bg-white text-gray-800 rounded-xl shadow-lg p-8 max-w-sm mx-auto">
-            <h1 className="text-3xl font-bold text-center mb-6">Create Your Account</h1>
+          <div className="bg-gray-900 text-gray-800 rounded-xl shadow-lg p-8 mt-11 max-w-sm mx-auto">
+            <h1 className="text-3xl font-bold text-center mb-6 text-teal-500">Create Your Account</h1>
 
             <form noValidate onSubmit={createNewAccount} className="space-y-4">
               <div className="flex flex-col items-center mb-4">
@@ -113,15 +113,15 @@ function Signup() {
                 <input
                 
                   type="file"
-                  id="image_upload"
+                  id="image_upload"                     
                   className="hidden"
-                  accept=".jpg,.jpeg,.png,.svg"
+                  accept=".jpg,.jpeg,.png,.svg,.mp4,.webp"
                   onChange={getImage}
                 />
               </div>
 
               <div>
-                <label htmlFor="username" className="block text-sm font-medium text-gray-700">Name</label>
+                <label htmlFor="username" className="block text-sm font-medium text-white">Name</label>
                 <input
                   type="text"
                   id="username"
@@ -135,7 +135,7 @@ function Signup() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                <label htmlFor="email" className="block text-sm font-medium text-white">Email</label>
                 <input
                   type="email"
                   id="email"
@@ -150,7 +150,7 @@ function Signup() {
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+                <label htmlFor="password" className="block text-sm font-medium text-white">Password</label>
                 <input
                   type="password"
                   id="password"

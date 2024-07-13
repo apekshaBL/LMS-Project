@@ -6,57 +6,79 @@ function HomePage() {
     <HomeLayouts>
       <div className="container mx-auto p-6">
         {/* Hero Section */}
-        <section className="flex flex-col md:flex-row items-center justify-between py-20 bg-gray-800 text-white">
-          <div className="md:w-1/2 p-6">
-            <img src="https://via.placeholder.com/400" alt="Course Image" className="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300" />
+        <section className="h-screen flex flex-col md:flex-row items-center justify-center bg-gray-800 text-white relative">
+          {/* Left Side (Image) */}
+          <div className="w-full md:w-1/2 p-6 flex justify-center">
+            <img 
+              src="https://via.placeholder.com/400" 
+              alt="Course Image" 
+              className="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300" 
+            />
           </div>
-          <div className="md:w-1/2 p-6 text-center md:text-left">
-            <h1 className="text-5xl font-bold">Elevate Your Skills with Us</h1>
-            <p className="mt-4 text-xl">Discover a range of expertly designed courses tailored to your needs.</p>
-            <button className="mt-6 bg-teal-500 text-white py-2 px-6 rounded-full hover:bg-teal-600 transition-colors duration-300">Explore Courses</button>
+          {/* Right Side (Text) */}
+          <div className="w-full md:w-1/2 p-6 text-center md:text-left">
+            <h1 className="text-5xl font-bold mb-4 text-teal-400">Elevate Your Skills with Us</h1>
+            <p className="text-xl mb-6 text-gray-300">
+              Explore expertly crafted courses designed to meet your needs and help you advance your career.
+            </p>
+            <Link to="/courses">
+              <button className="bg-teal-600 text-white py-3 px-8 rounded-full hover:bg-teal-700 transition-colors duration-300">
+                Explore Courses
+              </button>
+            </Link>
           </div>
         </section>
 
-        {/* Scroll Down Section */}
-        <section className="relative mt-16 py-16 bg-cover bg-center text-white" style={{ backgroundImage: "url('https://via.placeholder.com/1200x600')" }}>
-          <div className="absolute inset-0 bg-black opacity-40"></div>
-          <div className="relative z-10 text-center">
-            <h2 className="text-4xl font-semibold">Why Choose Us?</h2>
-            <p className="mt-4 text-lg">We offer unparalleled learning experiences and resources.</p>
-            <div className="mt-10 flex flex-wrap justify-center gap-6">
-              <div className="max-w-xs p-6 bg-white bg-opacity-90 shadow-lg rounded-lg">
-                <div className="text-teal-500 w-16 h-16 mx-auto">
-                  <i className="fas fa-chalkboard-teacher fa-3x"></i>
-                </div>
-                <h3 className="text-2xl font-semibold text-gray-800 mt-4">Expert Tutors</h3>
-                <p className="mt-2 text-gray-700">Learn from industry leaders who are dedicated to your success.</p>
+        {/* Features Section */}
+        <section className="py-16 bg-gray-900 text-white">
+          <h2 className="text-4xl font-semibold text-teal-500 text-center">Why Choose Us?</h2>
+          <p className="mt-4 text-lg text-gray-300 text-center">
+            Discover the benefits of learning with us and see why we're the right choice for your educational journey.
+          </p>
+          <div className="mt-10 flex flex-wrap justify-center gap-6">
+            <div className="max-w-xs p-6 bg-gray-800 shadow-lg rounded-lg">
+              <div className="text-teal-500 w-16 h-16 mx-auto">
+                <i className="fas fa-chalkboard-teacher fa-3x"></i>
               </div>
-              <div className="max-w-xs p-6 bg-white bg-opacity-90 shadow-lg rounded-lg">
-                <div className="text-teal-500 w-16 h-16 mx-auto">
-                  <i className="fas fa-clock fa-3x"></i>
-                </div>
-                <h3 className="text-2xl font-semibold text-gray-800 mt-4">Flexible Scheduling</h3>
-                <p className="mt-2 text-gray-700">Enjoy the freedom to learn at your own pace.</p>
+              <h3 className="text-2xl font-semibold text-white mt-4">Expert Tutors</h3>
+              <p className="mt-2 text-gray-400">
+                Learn from top professionals who are committed to your success.
+              </p>
+            </div>
+            <div className="max-w-xs p-6 bg-gray-800 shadow-lg rounded-lg">
+              <div className="text-teal-500 w-16 h-16 mx-auto">
+                <i className="fas fa-clock fa-3x"></i>
               </div>
-              <div className="max-w-xs p-6 bg-white bg-opacity-90 shadow-lg rounded-lg">
-                <div className="text-teal-500 w-16 h-16 mx-auto">
-                  <i className="fas fa-book-open fa-3x"></i>
-                </div>
-                <h3 className="text-2xl font-semibold text-gray-800 mt-4">Comprehensive Content</h3>
-                <p className="mt-2 text-gray-700">Access extensive and interactive resources.</p>
+              <h3 className="text-2xl font-semibold text-white mt-4">Flexible Scheduling</h3>
+              <p className="mt-2 text-gray-400">
+                Enjoy the flexibility to learn at your own pace with our adjustable schedules.
+              </p>
+            </div>
+            <div className="max-w-xs p-6 bg-gray-800 shadow-lg rounded-lg">
+              <div className="text-teal-500 w-16 h-16 mx-auto">
+                <i className="fas fa-book-open fa-3x"></i>
               </div>
+              <h3 className="text-2xl font-semibold text-white mt-4">Comprehensive Content</h3>
+              <p className="mt-2 text-gray-400">
+                Access a wide range of interactive resources and materials.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* Footer Section */}
-        <footer className="mt-16 text-center py-8 bg-gray-900 text-white">
-          <h2 className="text-3xl font-semibold">Start Your Learning Journey Today!</h2>
-          <p className="mt-4 text-lg">Join our community and make the most of our offerings.</p>
+        {/* Call to Action Section */}
+        <footer className="py-16 bg-teal-500 text-white text-center">
+          <h2 className="text-3xl font-semibold">
+            Start Your Learning Journey Today!
+          </h2>
+          <p className="mt-4 text-lg">
+            Join our community and unlock your potential with our exclusive courses and resources.
+          </p>
           <Link to="/signup">
-          <button className="mt-6 bg-teal-500 py-3 px-8 rounded-full hover:bg-teal-600 transition-colors duration-300">Get Started</button>
+            <button className="mt-6 bg-teal-700 text-white py-3 px-8 rounded-full hover:bg-teal-800 transition-colors duration-300">
+              Get Started
+            </button>
           </Link>
-
         </footer>
       </div>
     </HomeLayouts>

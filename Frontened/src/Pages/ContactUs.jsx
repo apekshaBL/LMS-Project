@@ -27,7 +27,7 @@ function Contact() {
     <HomeLayouts>
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-800 text-white">
         <div className="bg-gray-900 rounded-xl shadow-lg p-8 max-w-4xl w-full mx-4">
-          <h1 className="text-4xl font-bold text-center mb-8">Contact Us</h1>
+          <h1 className="text-4xl font-bold text-center mb-8 text-teal-400">Contact Us</h1>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>

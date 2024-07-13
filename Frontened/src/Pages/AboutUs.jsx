@@ -25,7 +25,7 @@ function AboutUs() {
         <div className="flex-grow flex flex-col md:flex-row items-center justify-center p-10 bg-gray-800 text-white">
           {/* Text Section */}
           <div className="md:w-1/2 text-center md:text-left p-6">
-            <h1 className="text-4xl font-bold mb-4">Affordable and Quality Education!</h1>
+            <h1 className="text-4xl font-bold mb-4 text-teal-400">Affordable and Quality Education!</h1>
             <p className="text-lg leading-relaxed">
               PW Skills is committed to providing affordable and high-quality education to learners from all walks of life. By leveraging the 
               latest in educational technology and partnering with industry experts, we deliver comprehensive and up-to-date courses that cater to the evolving demands 

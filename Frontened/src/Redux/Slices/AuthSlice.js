@@ -8,12 +8,12 @@ const initialState={
     data:localStorage.getItem('data')|| {}
 };
 
-export const createAccount=createAsyncThunk("/auth/signup",async(data)=>{
+export const createAccount=createAsyncThunk("/auth/signup",async(data,{rejectWithValue})=>{
     try{
         const res=axiosInstance.post("user/register",data);
         toast.promise(res,{
             loading:"Wait ! creating your account",
-            success:(data)=>{
+            success:(response)=>{
                 return data?.data?.message;
             },
             error:"Failed to create account"
