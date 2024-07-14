@@ -5,7 +5,7 @@ function CourseCard({ data }) {
 
   return (
     <div 
-      onClick={() => navigate(`/course/description/${data?.id}`)} 
+      onClick={() => navigate(`/course/description/`,{state:{...data}})} 
       className="w-full sm:w-80 md:w-80 h-96 bg-gray-800 text-white shadow-lg rounded-lg overflow-hidden cursor-pointer transition-transform transform hover:scale-105"
     >
       <img 

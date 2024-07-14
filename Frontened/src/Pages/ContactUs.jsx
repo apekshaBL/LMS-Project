@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import HomeLayouts from '@/Layouts/HomeLayouts';
 import { BsTelephone, BsEnvelope, BsGeoAlt } from 'react-icons/bs';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import toast from 'react-hot-toast';
+import { isEmail } from '@/Helpers/regexMatcher';
+import axiosInstance from '@/Helpers/axiosInstance';
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -18,15 +21,44 @@ function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e){
     e.preventDefault();
-    // Handle form submission logic here
+       if(!formData.name || !formData.email ||!formData.message){
+        toast.error("Please fill all the fields");
+        return;
+       }
+       if (!isEmail(formData.email)) {
+        toast.error('Please enter a valid email!');
+        return;
+      }
+     try{
+      const response=axiosInstance.post('/contact/contact',formData);
+      toast.promise(response,{
+        loading:"Submitting your message....",
+        success:"Form Submitted successfully",
+        error:"Failed to submit the Form"
+      })
+      const contactResponse = await response;
+      if(contactResponse?.data?.success){
+        setFormData({
+          name:"",
+          email:"",
+          message:""
+        });
+      }
+
+     }catch(e){
+      toast.error("Operation failed....")
+
+     }
+
+   
   };
 
   return (
     <HomeLayouts>
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-800 text-white">
-        <div className="bg-gray-900 rounded-xl shadow-lg p-8 max-w-4xl w-full mx-4">
+        <div className="bg-gray-900 rounded-xl shadow-lg p-8 mt-8 max-w-4xl w-full mx-4">
           <h1 className="text-4xl font-bold text-center mb-8 text-teal-400">Contact Us</h1>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
@@ -57,9 +89,10 @@ function Contact() {
             </div>
             <div>
               <h2 className="text-2xl font-semibold mb-4">Send Us a Message</h2>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} noValidate className="space-y-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300">Name</label>
+                  <label htmlFor="name"
+                   className="block text-sm font-medium text-gray-300">Name</label>
                   <input
                     type="text"
                     id="name"

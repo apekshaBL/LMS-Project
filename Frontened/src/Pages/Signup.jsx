@@ -5,6 +5,7 @@ import { BsPersonCircle } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 import { createAccount } from '@/Redux/Slices/AuthSlice';
+import { isEmail, isPassword } from '@/Helpers/regexMatcher';
 
 
 function Signup() {
@@ -52,11 +53,11 @@ function Signup() {
       toast.error('Your Name should be of at least 5 characters!');
       return;
     }
-    if (!signupData.email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+    if (!isEmail(signupData.email)) {
       toast.error('Please enter a valid email!');
       return;
     }
-    if (!signupData.password.match(/^(?=.*\d)(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹])(?=.*[a-z])(?=.*[A-Z]).{16,}$/)) {
+    if (!isPassword(signupData.password)) {
       toast.error('Enter a strong password with at least 16 characters, including an uppercase letter, a lowercase letter, a number, and a special character.');
       return;
     }

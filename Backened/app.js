@@ -9,6 +9,7 @@ import userRoutes from './router/user.routes.js';
 import errorMiddleware from './Middlewares/error.middleware.js';
 import router from "./router/course.routes.js";
 import paymentrouter from "./router/payment.routes.js";
+import contactrouter from "./router/contact.routes.js";
 
 
 const app=express();
@@ -42,6 +43,7 @@ app.use("/about",(req,res)=>{
 app.use('/api/v1/user',userRoutes);
 app.use('/api/v1/courses',router);
 app.use('/api/v1/payments',paymentrouter);
+app.use('/api/v1/contact',contactrouter)
 
 
 //handle undefined routes ....
