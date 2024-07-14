@@ -5,20 +5,17 @@ import Notfound from "./Pages/Notfound.jsx"
 import Signup from "./Pages/Signup.jsx"
 import Contact from "./Pages/ContactUs.jsx"
 import Login from "./Pages/Login.jsx"
-
-
-
-
+import CourseList from "./Pages/Course/CourseList.jsx"
 
 function App() {
   return (
    <>
-   
      <Routes>
       <Route path="/" element={<HomePage/>}/>
       <Route path="/about" element={<AboutUs/>}/>
       <Route path="/signup" element={<Signup/>}/>
       <Route path="/contact" element={<Contact/>}/>
+      <Route path="/AllCourses" element={<CourseList/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="*" element={<Notfound/>}/>
 
