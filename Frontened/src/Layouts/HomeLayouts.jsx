@@ -27,19 +27,20 @@ function HomeLayouts({ children }) {
             {isLoggedIn && role === 'ADMIN' && (
               <Link to="/admin/dashboard" className="text-white hover:text-teal-400 transition-colors duration-300">Admin Dashboard</Link>
             )}
+          
+            <Link to="/about" className="text-white hover:text-teal-400 transition-colors duration-300">About Us</Link>
+            <Link to="/contact" className="text-white hover:text-teal-400 transition-colors duration-300">Contact Us</Link>
+            <Link to="/AllCourses" className="text-white hover:text-teal-400 transition-colors duration-300">All Courses</Link>
             {isLoggedIn && (
               <div className='flex items-center space-x-2'>
                 <Button asChild className='bg-teal-500 text-white hover:bg-teal-600 transition-colors duration-300'>
                   <Link to="/profile">Profile</Link>
                 </Button>
                 <Button asChild className='bg-red-500 text-white hover:bg-red-600 transition-colors duration-300' onClick={handleLogout}>
-                  LogOut
+                  <Link to="/logout"> LogOut </Link>
                 </Button>
               </div>
             )}
-            <Link to="/about" className="text-white hover:text-teal-400 transition-colors duration-300">About Us</Link>
-            <Link to="/contact" className="text-white hover:text-teal-400 transition-colors duration-300">Contact Us</Link>
-            <Link to="/AllCourses" className="text-white hover:text-teal-400 transition-colors duration-300">All Courses</Link>
             {!isLoggedIn && (
               <div className='flex items-center space-x-2'>
                 <Button asChild className='bg-teal-500 text-white hover:bg-teal-600 transition-colors duration-300'>
