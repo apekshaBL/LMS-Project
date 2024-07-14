@@ -2,6 +2,7 @@ import Footer from '@/LayoutComponents/Footer';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from "@/components/ui/button"; // Ensure this path is correct
+import { logout } from '@/Redux/Slices/AuthSlice';
 
 function HomeLayouts({ children }) {
   const dispatch = useDispatch();
@@ -9,11 +10,13 @@ function HomeLayouts({ children }) {
   const isLoggedIn = useSelector((state) => state?.auth?.isLoggedIn);
   const role = useSelector((state) => state?.auth?.role);
 
-  const handleLogout = (e) => {
-    e.preventDefault();
-    // Add your logout logic here, e.g., dispatch(logoutAction());
+//logout function
+async function handleLogout(e){
+  e.preventDefault();
+  const res=await dispatch(logout());
+  if(res?.payload?.success)
     navigate('/');
-  };
+}
 
   return (
     <>
