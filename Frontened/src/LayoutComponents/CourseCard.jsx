@@ -10,7 +10,7 @@ function CourseCard({ data }) {
     >
       <img 
         className="w-full h-40 object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-110" 
-        src={data?.thumbnail?.secure_url} 
+        src={data?.thumbnail|| 'https://tse4.mm.bing.net/th?id=OIP.QI29d315w9fABt0BQCsIwwHaE8&pid=Api&P=0&h=180'} 
         alt="Course Thumbnail" 
       />
       <div className="p-4 space-y-2">
