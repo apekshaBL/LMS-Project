@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { FaChalkboardTeacher, FaBookOpen, FaClock } from "react-icons/fa";
 
-function CourseDescription() {
+  function CourseDescription() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const { role, data } = useSelector((state) => state.auth);

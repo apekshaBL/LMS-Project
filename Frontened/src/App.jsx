@@ -8,6 +8,8 @@ import Login from "./Pages/Login.jsx"
 import CourseList from "./Pages/Course/CourseList.jsx"
 import Denied from "./Pages/Denied.jsx"
 import CourseDescription from "./Pages/Course/CourseDescription.jsx"
+import RequireAuth from "./LayoutComponents/Auth/RequireAuth.jsx"
+import CreateCourse from "./Pages/Course/CreateCourse.jsx"
 
 function App() {
   return (
@@ -20,10 +22,12 @@ function App() {
       <Route path="/AllCourses" element={<CourseList/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/denied" element={<Denied/>}/>
-      <Route path="/course/description" element={<CourseDescription/>}/>
       <Route path="*" element={<Notfound/>}/>
-
-     </Routes>
+      <Route path="/course/description" element={<CourseDescription/>}/>
+      <Route element={<RequireAuth allowedRoles={["ADMIN"]}/>}>
+       <Route path="/course/create" element={ <CreateCourse/> } />
+      </Route>
+     </Routes >
     
    </>
   )
