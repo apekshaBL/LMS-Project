@@ -20,7 +20,7 @@ async function handleLogout(e){
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 bg-gray-900 shadow-md z-30 py-4">
+      <nav className="fixed top-0 left-0 right-0 bg-gray-900 shadow-md z-30 py-4 ">
         <div className="container mx-auto flex justify-between items-center px-6">
           <div className="text-white text-3xl font-bold">
             <Link to="/" className='hover:text-teal-400 transition-colors duration-300'>PW Skills</Link>
@@ -29,7 +29,13 @@ async function handleLogout(e){
             <Link to="/" className="text-white hover:text-teal-400 transition-colors duration-300">Home</Link>
             {isLoggedIn && role === 'ADMIN' && (
               <Link to="/admin/dashboard" className="text-white hover:text-teal-400 transition-colors duration-300">Admin Dashboard</Link>
+            
             )}
+            {isLoggedIn && role==="ADMIN" &&(
+                <Link to="/course/create" href="" className='text-white hover:text-teal-400 transition-colors duration-300'>Create new Course</Link>
+              
+              )
+            }
           
             <Link to="/about" className="text-white hover:text-teal-400 transition-colors duration-300">About Us</Link>
             <Link to="/contact" className="text-white hover:text-teal-400 transition-colors duration-300">Contact Us</Link>

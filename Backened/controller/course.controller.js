@@ -33,7 +33,6 @@ const getLecturesByCourseId=async(req,res,next)=>{
             lectures:course.lectures
         });
 
-
     }catch(error){
         return next(new AppError(error.message,500))
     }
@@ -46,7 +45,7 @@ const createcourse=async(req,res,next)=>{
     try{
         const{title,description,category,numbersOfLectures,createdBy}=req.body;
         console.log(title,description,category,numbersOfLectures,createdBy);
-        if(!title || !description || !category || ! numbersOfLectures || ! createdBy){
+        if(!title || !description || !category || ! createdBy){
             return next(new AppError("please fill all the fields",400))
         };
 

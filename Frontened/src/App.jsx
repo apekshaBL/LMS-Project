@@ -11,8 +11,9 @@ import CourseDescription from "./Pages/Course/CourseDescription.jsx"
 import RequireAuth from "./LayoutComponents/Auth/RequireAuth.jsx"
 import CreateCourse from "./Pages/Course/CreateCourse.jsx"
 
+
 function App() {
-  return (
+  return (     
    <>
      <Routes>
       <Route path="/" element={<HomePage/>}/>

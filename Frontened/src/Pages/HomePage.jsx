@@ -21,7 +21,7 @@ function HomePage() {
             <p className="text-xl mb-6 text-gray-300">
               Explore expertly crafted courses designed to meet your needs and help you advance your career.
             </p>
-            <Link to="/courses">
+            <Link to="/Allcourses">
               <button className="bg-teal-600 text-white py-3 px-8 rounded-full hover:bg-teal-700 transition-colors duration-300">
                 Explore Courses
               </button>
