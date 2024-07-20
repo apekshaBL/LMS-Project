@@ -1,7 +1,7 @@
 import Footer from '@/LayoutComponents/Footer';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from "@/components/ui/button"; // Ensure this path is correct
+import { Button } from "@/components/ui/button"; 
 import { logout } from '@/Redux/Slices/AuthSlice';
 
 function HomeLayouts({ children }) {
