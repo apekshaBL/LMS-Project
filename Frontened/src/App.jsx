@@ -11,6 +11,10 @@ import CourseDescription from "./Pages/Course/CourseDescription.jsx"
 import RequireAuth from "./LayoutComponents/Auth/RequireAuth.jsx"
 import CreateCourse from "./Pages/Course/CreateCourse.jsx"
 import Profile from "./Pages/User/Profile.jsx"
+import Editprofile from "./Pages/User/Editprofile.jsx"
+import Checkout from "./Pages/Payment/Checkout.jsx"
+import CheckoutSuccess from "./Pages/Payment/CheckoutSuccess.jsx"
+import CheckoutFailure from "./Pages/Payment/CheckoutFailure.jsx"
 
 
 function App() {
@@ -25,11 +29,16 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="/denied" element={<Denied/>}/>
       <Route path="*" element={<Notfound/>}/>
+     
       
       <Route element={<RequireAuth allowedRoles={["ADMIN","USER"]} />}>
       <Route path="/profile" element={<Profile/>}/>
+      <Route path="/editprofile" element={<Editprofile/>}/>
+      <Route path="/checkout" element={<Checkout/>}/>
+      <Route path="/checkout/success" element={<CheckoutSuccess/>}/>
+      <Route path="/checkout/failure" element={<CheckoutFailure/>}/>
       </Route>
-     
+
       <Route path="/course/description" element={<CourseDescription/>}/>
 
       <Route element={<RequireAuth allowedRoles={["ADMIN"]}/>}>

@@ -54,9 +54,9 @@ import { FaChalkboardTeacher, FaBookOpen, FaClock } from "react-icons/fa";
                   {role === 'ADMIN' || data?.subscription?.status === 'ACTIVE' ? (
                     <Button
                       className="bg-teal-500 text-white py-3 px-6 rounded-lg hover:bg-teal-600 transition-transform duration-300 transform hover:scale-105"
-                      onClick={() => navigate("/course/lectures")}
+                      onClick={() => navigate("/checkout")}
                     >
-                      Watch Lectures
+                      Subscribe
                     </Button>
                   ) : (
                     <Button

@@ -7,7 +7,7 @@ import sendEmail from "../utils/sendEmail.js";
 import crypto from "crypto";
 
 const cookieOptions={
-    maxAge:7*24*60*60*1000, // 7 days cookie is set
+    maxAge:30*24*60*60*1000, // 7 days cookie is set
     httpOnly:true,
     secure:true
 }
@@ -257,11 +257,11 @@ const changePassword=async(res,req,next)=>{
 const update=async(req,res,next)=>{
     const {username}=req.body;
     const{id}=req.params;
-    const user=User.findOne({id});
+    const user=await User.findById(id);
     if(!user){
         return next(new AppError('user doest not exit',400))
     };
-    if(req.username){
+    if(username){
         user.username=username;
     };
     if(req.file){
@@ -284,7 +284,7 @@ const update=async(req,res,next)=>{
                     }
                 }
                 catch(error){
-                    return next ( new AppError(error || 'file not uploaded,please try again',500))
+                    return next ( new AppError(error || 'file not uploaded,please try again',400))
                 }
             }
         

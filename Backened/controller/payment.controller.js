@@ -17,28 +17,35 @@ const getRazorpayApiKey=async(req,res,next)=>{
 
 const buySubscription=async(req,res,next)=>{
     const{id}=req.body;
-    const user=await User.findById(id);
-    if(!user){
-        return next(new AppError ("user do not exits",500))
-    };
-    if(user.role==='ADMIN'){
-        return next(new AppError("ADMIN can'nt purchase subscription",500))
+    try{
+        console.log("Received ID:", id);
+        const user=await User.findById(id);
+        console.log("User found:", user);
+        if(!user){
+            return next(new AppError ("user do not exits",404))
+        }
+        if(user.role ==='ADMIN'){
+            return next(new AppError("ADMIN can'nt purchase subscription",403))
+        }
+    
+        const subscription = await razorpay.subscriptions.create({
+            plan_id:process.env.RAZORPAY_PLAN_ID,
+            customer_notify:1
+        });
+        user.subscription.id=subscription.id;
+        user.subscription.status=subscription.status;
+        await user.save();
+
+        res.status(200).json({
+            success:true,
+            message:"Subscribed Successfully",
+            subscription_id:subscription.id
+        });
     }
-
-    const subscription = await razorpay.subscriptions.create({
-        plan_id:process.env.RAZORPAY_PLAN_ID,
-        customer_notify:1
-    });
-
-    user.subscription.id=subscription.id;
-    user.subscription.status=subscription.status;
-    await user.save();
-    res.status(200).json({
-        success:true,
-        message:"Subscribed Successfully",
-        subscription_id:subscription.id
-    })
-
+    catch(error){
+        console.error("Error in buySubscription:", error);
+        return next(new AppError(error.message, 500));
+    }
 }
 
 
@@ -54,8 +61,8 @@ const verifySubscription=async(req,res,next)=>{
     .createHmac('sha256',process.env.RAZORPAY_SECRET)
     .update(`${razorpay_payment_id}|${subscriptionId}`)
     .digest('hex');
-    if(generatedSignature !==razorpay_signature){
-        return next(new(AppError("payment not verified,please try again",500)))
+    if(generatedSignature !== razorpay_signature){
+        return next(new(AppError("payment not verified,please try again",400)))
     }
     await Payment.create({
         razorpay_payment_id,

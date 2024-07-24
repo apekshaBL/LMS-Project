@@ -1,4 +1,4 @@
-import axiosInstance from "@/Helpers/axiosInstance"
+import axiosInstance from "@/Helpers/axiosInstance.js"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import toast from "react-hot-toast"
 
@@ -18,16 +18,19 @@ export const getRazorpayId=createAsyncThunk("/razorpay/getId",async()=>{
         return response.data;
     }catch(error){
         toast.error("Failed to load the data");
+        throw error;
     }
 });
 
-export const purchaseCourseBundle=createAsyncThunk("/razorpay/purchasecourse",async()=>{
+export const purchaseCourseBundle=createAsyncThunk("/razorpay/purchasecourse",async(id,{rejectWithValue})=>{
     try{
-        const response=await axiosInstance.post("/payments/subscribe");
+        const response=await axiosInstance.post("/payments/subscribe",{id});
         return response.data;
     }
     catch(error){
-        toast.error(error?.response?.data?.message);
+        toast.error(error?.response?.data?.message||"Failed to purchase course bundle");
+        return rejectWithValue(error.response.data);
+       
     }
 });
 

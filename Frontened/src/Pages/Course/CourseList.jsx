@@ -18,7 +18,7 @@ function CourseList(){
 
     return(
         <HomeLayouts>
-        <div className="container mx-auto p-6 ">
+        <div className="container mx-auto p-6  bg-gray-900">
           <h1 className="text-4xl font-bold mt-14  mb-8 text-teal-400 text-center">Explore the Courses made by <span>Industry Experts</span></h1>
           <div className="mb-10 flex flex-wrap justify-center gap-14">
             {
