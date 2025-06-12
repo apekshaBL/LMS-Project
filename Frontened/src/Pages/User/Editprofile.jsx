@@ -11,11 +11,13 @@ import { Link } from "react-router-dom";
 function EditProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userId = useSelector((state) => state?.auth?.data?._id);
+
   const [data, setData] = useState({
     previewImage: "",
     username: "",
     avatar: undefined,
-    userId: useSelector((state) => state?.auth?.data?._id),
+    userId: userId,
   });
 
   function handleImageUpload(e) {
@@ -24,13 +26,13 @@ function EditProfile() {
     if (uploadedImage) {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(uploadedImage);
-      fileReader.addEventListener("load", function () {
+      fileReader.onload = function () {
         setData({
           ...data,
           previewImage: this.result,
           avatar: uploadedImage,
         });
-      });
+      };
     }
   }
 
@@ -56,7 +58,7 @@ function EditProfile() {
     formData.append("fullname", data.username);
     formData.append("avatar", data.avatar);
 
-    await dispatch(updateProfile({id:data.userId, data:formData}));
+    await dispatch(updateProfile({ id: data.userId, data: formData }));
     await dispatch(getUserData());
 
     navigate("/profile");
@@ -83,7 +85,7 @@ function EditProfile() {
               type="file"
               id="image_uploads"
               name="image_uploads"
-              accept=".jpg,.jpeg,.mp4,.svg,.png"
+              accept=".jpg,.jpeg,.png,.svg"
             />
           </label>
           <div className="flex flex-col gap-1">
@@ -99,8 +101,10 @@ function EditProfile() {
               onChange={handleInputChange}
             />
           </div>
-          <Button asChild type="submit" className="bg-teal-500 text-white hover:bg-teal-600 transition-colors duration-300">
-            <Link to="/profile">Update Profile</Link>
+          <Button 
+            type="submit" 
+            className="bg-teal-500 text-white hover:bg-teal-600 transition-colors duration-300" onSubmit={onFormSubmit}>
+            Update Profile
           </Button>
           <Button asChild className="bg-teal-500 text-white hover:bg-teal-600 transition-colors duration-300">
             <Link to="/profile">Go back to profile</Link>
